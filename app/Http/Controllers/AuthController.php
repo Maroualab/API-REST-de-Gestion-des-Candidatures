@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -43,6 +44,9 @@ class AuthController extends Controller
             });
             $user->skills()->sync($skills);
         }
+
+        $role = Role::firstOrCreate(['name' => $request->get('role')]);
+        $user->roles()->attach($role);
 
         $token = JWTAuth::fromUser($user);
 

@@ -41,7 +41,7 @@ class JobOfferController extends Controller
             'salary' => 'int',
         ]);
 
-        $jobOffer->update($request->only(['title', 'description', 'location', 'contract_type', 'category' , 'salary']));
+        $jobOffer->update($request->all());
 
         return response()->json(['job_offer' => $jobOffer]);
     }
